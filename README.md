@@ -77,7 +77,7 @@ Here is the result when I started 10 clients (along with the clients generator) 
 
 ### Conclusion
 
-Note for both kinds of thread, there were memory pressure cause for each thread (platform or virtual) the JVM allocates head and stack memory for it.
+Note for both kinds of thread, there were memory increase when the number of threads incresed, because for each thread (platform or virtual) the JVM allocates heap and stack memory for it.
 
 But, in the case the virtual thread weren't need to use OS process until any CPU-bounded work were done.
 

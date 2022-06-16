@@ -49,7 +49,7 @@ And in the Threads tab we can see the current active threads.
 Using virtual threads, the server does the same: for each client it will create a new virtual thread.
 But, the advantage is that the each client won't need a OS process.
 
-It will only use a OS process when it is performing CPU-bounded work, but in a chat application the most work is IO-bounded.
+It will only use a OS process when it is performing CPU-bound work, but in a chat application the most work is IO-bound.
 
 Using JVM, we can see in the Monitor tab that the amount of threads is much lower then before.
 And in Thread tab, we can see the ForkJoinPool threads that were created to handle the virtual thread work.
@@ -58,7 +58,7 @@ And in Thread tab, we can see the ForkJoinPool threads that were created to hand
 | --- | --- |
 | ![](img/chat-server-virtual-multithreads-count.png) | ![](img/chat-server-virtual-multithreads-active.png) |
 
-To stress the virtual threads, we could create some clients and request the calculation of Fibonacci sequence to do some CPU-bounded work.
+To stress the virtual threads, we could create some clients and request the calculation of Fibonacci sequence to do some CPU-bound work.
 
 ```sh
 $ telnet 127.0.0.1 8000
@@ -77,9 +77,9 @@ Here is the result when I started 10 clients (along with the clients generator) 
 
 ### Conclusion
 
-Note for both kinds of thread, there were memory increase when the number of threads incresed, because for each thread (platform or virtual) the JVM allocates heap and stack memory for it.
+Note for both kinds of thread, the memory also increased when the number of threads increased, because for each thread (platform or virtual) the JVM allocates heap and stack memory for it.
 
-But, in the case the virtual thread weren't need to use OS process until any CPU-bounded work were done.
+But, in the case the virtual, the threads didn't have to have an OS process until any CPU-bound work were done.
 
-So, if you have an application that the most work is IO-bounded (most of enterprise application), you should get a better performance and use of your resources.
+So, if you have an application that the most work is IO-bound (most of enterprise application), you should get a better performance and use of your resources.
 Keep in mind that the memory may behave the same, so if your application would start thousands or millions of virtual threads, better have the memory for it.

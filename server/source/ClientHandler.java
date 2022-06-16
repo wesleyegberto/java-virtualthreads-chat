@@ -19,7 +19,7 @@ class ClientHandler implements Runnable {
 		this.initClient();
 		String input;
 		try {
-			listening: while (this.isConnected() && (input = reader.readLine()) != null) {
+			while (this.isConnected() && (input = reader.readLine()) != null) {
 				if ("exit".equals(input)) {
 					break;
 				} else {

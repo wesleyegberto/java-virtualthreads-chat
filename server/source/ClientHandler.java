@@ -28,7 +28,7 @@ class ClientHandler implements Runnable {
 			}
 
 			if (this.isConnected()) {
-				this.writer.write("[Server] Bye bye\r\n");
+				this.sentToClient("Bye bye");
 			}
 		} catch (IOException ex) {
 			System.err.println("> Error while reading client input: " + ex.getMessage());
@@ -77,8 +77,7 @@ class ClientHandler implements Runnable {
 		try {
 			this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-			this.writer.write("[Server] Hello from VirtualThread Server\r\n");
-			this.writer.flush();
+			this.sentToClient("Hello from VirtualThread Server");
 		} catch (IOException ex) {
 			System.err.println("> Error while initializing client: " + ex.getMessage());
 		}
